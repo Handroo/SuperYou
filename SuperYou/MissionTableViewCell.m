@@ -131,7 +131,7 @@
 
 
 - (IBAction)commentButtonPressed:(id)sender {
-    NSLog(@"commented");
+    NSLog(@"commented pressed on cell");
     //should open the view and automatically open the =keyboard
     [(MissionsHomeViewController*)self.superView didSelectComments];
 
