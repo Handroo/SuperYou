@@ -87,7 +87,7 @@
 }
 
 -(void)didSelectComments{
-    NSLog(@"did select comments");
+    NSLog(@"did select comments from super view");
 }
 
 

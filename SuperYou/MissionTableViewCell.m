@@ -8,6 +8,7 @@
 
 #import "MissionTableViewCell.h"
 #import "AppDelegate.h"
+#import "MissionsHomeViewController.h"
 @interface MissionTableViewCell()
 {
     NSMutableData *_downloadedData;
@@ -132,7 +133,7 @@
 - (IBAction)commentButtonPressed:(id)sender {
     NSLog(@"commented");
     //should open the view and automatically open the =keyboard
-    
+    [(MissionsHomeViewController*)self.superView didSelectComments];
 
 }
 

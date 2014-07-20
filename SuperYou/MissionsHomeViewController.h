@@ -18,4 +18,5 @@
 @property (nonatomic, strong) NSMutableArray *rowPictures;
 @property(nonatomic, strong) NSMutableDictionary *pictureStorage;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil userdata:(UserData *)data;
+-(void)didSelectComments;
 @end
