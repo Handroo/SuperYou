@@ -10,7 +10,7 @@
 #import "UserData.h"
 #import "ProfileHomeViewController.h"
 @interface MissionTableViewCell : UITableViewCell
-
+@property (nonatomic) NSInteger rowIndex;
 @property(nonatomic,weak)UIViewController* superView;
 @property(nonatomic, retain) UserData* creatorData;
 @property(nonatomic, retain) NSMutableDictionary* likeDictionary;

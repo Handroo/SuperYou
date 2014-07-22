@@ -66,7 +66,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     Missions* m = [self packageCellToMission:(MissionTableViewCell*)[tableView cellForRowAtIndexPath:indexPath]];
     
-    ViewMissionViewController *view = [[ViewMissionViewController alloc]init];
+    ViewMissionViewController *view = [[ViewMissionViewController alloc]initWithMission:m];
     view.mission = m;
     
     [self.navigationController pushViewController:view animated:YES];
@@ -86,8 +86,14 @@
     return temp;
 }
 
--(void)didSelectComments{
-    NSLog(@"did select comments from super view");
+-(void)didSelectComments:(NSInteger)index{
+    NSLog(@"did select comments from super view %ld", (long)index);
+    Missions* m = [self packageCellToMission:(MissionTableViewCell*)[self.missionsTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]]];
+    ViewMissionViewController *view = [[ViewMissionViewController alloc]initWithMission:m];
+    view.mission = m;
+    view.commentPress = YES;
+    [self.navigationController pushViewController:view animated:YES];
+    
 }
 
 
@@ -122,6 +128,8 @@
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MissionTableViewCell" owner:self options:nil];
         cell = (MissionTableViewCell*)[topLevelObjects objectAtIndex:0];
         ((MissionTableViewCell*)cell).superView = self;
+
+        ((MissionTableViewCell*)cell).rowIndex = indexPath.row;
     }
     NSDictionary *jsonElement = self.receivedJSONArray[indexPath.row];
  
@@ -177,24 +185,8 @@
 
 - (void)downloadMissionItems
 {
-    
-//    // Download the json file
-//    NSURL *jsonFileUrl = [NSURL URLWithString:@"http://www.helloandrewhan.com/superyou/getAllMissions.php"];
-//    // Create the request
-//    NSURLRequest *urlRequest = [[NSURLRequest alloc] initWithURL:jsonFileUrl];
-//    // Create the NSURLConnection
-//    [NSURLConnection connectionWithRequest:urlRequest delegate:self];
-//    
-//    
-//    
-//    
-//    
-    
-    
-//    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//    NSString *post = [NSString stringWithFormat:@"user_id=%@", appDelegate.masterTabBarViewController.userData.user_id];
+
     NSString *post = [NSString stringWithFormat:@"user_id=%@", self.userData.user_id];
-    NSLog(post);
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:NO];
 
     NSURL *url = [NSURL URLWithString:@"http://www.helloandrewhan.com/superyou/getAllMissions.php"];
@@ -238,25 +230,7 @@
     self.receivedJSONArray = [NSJSONSerialization JSONObjectWithData:_downloadedData options:NSJSONReadingAllowFragments error:&error];
      NSLog(@"User ALL MISSIONS: %@",self.receivedJSONArray );
     
-    //Loop through Json objects, create question objects and add them to our questions array
-//    for (int i = 0; i < jsonArray.count; i++)
-//    {
-//        NSDictionary *jsonElement = jsonArray[i];
-//        
-//        // Create a new location object and set its props to JsonElement properties
-//        
-//        self.userData.name = jsonElement[@"title"];
-//        self.userData.user_id = jsonElement[@"description"];
-//        self.userData.missions_complete = jsonElement[@"creator_user_id"];
-//        self.userData.personal_missions = jsonElement[@"creation_date"];
-//        self.userData.friend_count = jsonElement[@"mission_id"];
-//        self.userData.friend_count = jsonElement[@"complete_user_id"];
-//        self.userData.friend_count = jsonElement[@"completion_date"];
-//        
-//        
-//        // Add this question to the user array
-//        [_user addObject:self.userData];
-//    }
+
 }
 
 

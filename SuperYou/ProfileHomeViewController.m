@@ -179,14 +179,14 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    ViewMissionViewController *view = [[ViewMissionViewController alloc]init];
+    
     
     if([tableView isEqual:self.yourMissionsTableView]){
-        view.mission = self.userData.userMissions.missionArray[indexPath.row];
+        ViewMissionViewController *view = [[ViewMissionViewController alloc]initWithMission:self.userData.userMissions.missionArray[indexPath.row]];
         [self.navigationController pushViewController:view animated:YES];
     }
     else if ([tableView isEqual:self.missionsCompleteTableView]){
-        view.mission = self.userData.userCompletedMissions.missionCompletedArray[indexPath.row];
+        ViewMissionViewController *view = [[ViewMissionViewController alloc]initWithMission:self.userData.userCompletedMissions.missionCompletedArray[indexPath.row]];
         [self.navigationController pushViewController:view animated:YES];
     }
     else if ([tableView isEqual:self.friendsTableView]){

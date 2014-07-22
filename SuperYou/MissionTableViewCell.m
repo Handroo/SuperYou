@@ -112,28 +112,14 @@
     NSError *error;
     NSArray *jsonArray = [NSJSONSerialization JSONObjectWithData:_downloadedData options:NSJSONReadingAllowFragments error:&error];
     NSLog(@"LIKED %@",jsonArray);
-    
-//    //Loop through Json objects, create question objects and add them to our questions array
-//    for (int i = 0; i < jsonArray.count; i++)
-//    {
-//        NSDictionary *jsonElement = jsonArray[i];
-//        self.name = jsonElement[@"name"];
-//        self.user_id = jsonElement[@"user_id"];
-//        self.missions_complete = jsonElement[@"missions_complete"];
-//        self.personal_missions = jsonElement[@"personal_missions"];
-//        self.friend_count = jsonElement[@"friend_count"];
-//        
-//    }
-//    NSLog(@"finish downloading user data initially");
-//    _callBackCount++;
+
     
 }
 
 
 - (IBAction)commentButtonPressed:(id)sender {
-    NSLog(@"commented pressed on cell");
     //should open the view and automatically open the =keyboard
-    [(MissionsHomeViewController*)self.superView didSelectComments];
+    [(MissionsHomeViewController*)self.superView didSelectComments:self.rowIndex];
 
 }
 
