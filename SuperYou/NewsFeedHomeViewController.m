@@ -12,6 +12,7 @@
 #import "Missions.h"
 #import "Friendship.h"
 #import "PhotoCache.h"
+#import "ViewMissionViewController.h"
 @interface NewsFeedHomeViewController ()
 
 @end
@@ -55,7 +56,27 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    UITableViewCell *cell = [self.newsFeedTableView cellForRowAtIndexPath:indexPath];
+    if([cell isKindOfClass:[MissionTableViewCell class]]){
+        ViewMissionViewController *view = [[ViewMissionViewController alloc]initWithMission:[self packageCellToMission:(MissionTableViewCell*)cell]];
+        [self.navigationController pushViewController:view animated:YES];
+        
+    }
+}
 
+-(Missions*)packageCellToMission:(MissionTableViewCell*)cell{
+    Missions* temp = [[Missions alloc]init];
+    temp.creatorUserId = cell.creatorUserId;
+    temp.creatorUserName = cell.creatorName.text;
+    temp.completeUserName = cell.finisherName.text;
+    //        temp.completeUserId = cell.;
+    temp.completionDate = cell.timeCompleted.text;
+    temp.creationDate = cell.timeCreated.text;
+    temp.description = cell.missionDescription.text;
+    temp.missionId = cell.missionId;
+    
+    return temp;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
