@@ -297,7 +297,28 @@
         if([jsonElement[@"type"] isEqualToString:@"mission_comment"]){
             CommentView* comment = [[CommentView alloc]initWithFrame:CGRectMake(0, 470+[self.commentList count]*150, self.view.frame.size.width, 140)];
             [comment.xibCommentView.commentText setText:jsonElement[@"comment_text"]];
-             comment.xibCommentView.nameLabel.text = jsonElement[@"comment_user_id"];
+             comment.xibCommentView.nameLabel.text = jsonElement[@"name"];
+            comment.xibCommentView.commentorId = jsonElement[@"user_id"];
+            if (comment.xibCommentView.commentorPic.image == nil && ![[PhotoCache photoDictionary] objectForKey:comment.xibCommentView.commentorId]) {
+                
+                [FBRequestConnection startForMeWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                    if (!error) {
+                        // Success! Include your code to handle the results here
+                        //            NSLog(@"user info: %@", result);
+                        comment.xibCommentView.commentorPic.image = [[UIImage alloc] initWithData:
+                                                   [NSData dataWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://graph.facebook.com/%@/picture?type=large&width=120&height=120", comment.xibCommentView.commentorId]]]
+                                                   ];
+                        
+                    } else {
+                        // An error occurred, we need to handle the error
+                        // See: https://developers.facebook.com/docs/ios/errors
+                    }
+                }];
+            }else{
+                comment.xibCommentView.commentorPic.image = [[PhotoCache photoDictionary]objectForKey:comment.xibCommentView.commentorId];
+                
+            }
+
              
              [self.commentList addObject:comment];
             [self.scrollView addSubview:comment];
@@ -305,7 +326,7 @@
         
     }
     
-    
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 140*[self.commentList count]+self.view.frame.size.height)];
     NSLog(@"finish downloading user data initially");
     
 }

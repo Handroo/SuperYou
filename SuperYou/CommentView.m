@@ -19,6 +19,7 @@
         // now add the view to ourselves...
         [self.xibCommentView setFrame:[self bounds]];
         [self addSubview:self.xibCommentView];
+        [self.xibCommentView.commentText setUserInteractionEnabled:NO];
     }
     return self;
 }

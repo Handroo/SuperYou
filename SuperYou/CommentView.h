@@ -10,6 +10,7 @@
 
 @interface CommentView : UIView
 
+@property(strong,nonatomic)NSString* commentorId;
 @property(nonatomic,weak)IBOutlet UILabel* nameLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *commentorPic;
 @property (strong, nonatomic) IBOutlet UITextView *commentText;
