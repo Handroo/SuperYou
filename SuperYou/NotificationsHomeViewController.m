@@ -31,6 +31,17 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.emptyLabel setHidden:YES];
+    if([self.notificationArray count]<1){
+        [self.notificationsTableView setHidden:YES];
+        [self.emptyLabel setText:@"No notifications yet!"];
+        [self.emptyLabel setHidden:NO];
+    }else{
+        [self.notificationsTableView setHidden:NO];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];

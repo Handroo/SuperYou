@@ -11,6 +11,7 @@
 #import "BasePrimaryViewController.h"
 #import "UserData.h"
 @interface NotificationsHomeViewController : BasePrimaryViewController
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @property(nonatomic, weak)IBOutlet UITableView* notificationsTableView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil userdata:(UserData*)data;
 @property(nonatomic, strong) UserData *userData;
