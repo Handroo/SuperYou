@@ -15,6 +15,7 @@
 
 @interface ProfileHomeViewController : BasePrimaryViewController<NSURLConnectionDataDelegate>
 @property(nonatomic, retain) UIImage* profilePictureImage;
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @property(nonatomic, strong) UserData *userData;
 @property(nonatomic) BOOL *disableFriendRequestButton;
 @property(nonatomic) BOOL *friendAlready;

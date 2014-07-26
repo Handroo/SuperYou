@@ -106,13 +106,13 @@
     }
     
     for(CommentView* c in self.commentList){
-        [c setFrame:CGRectMake(0, c.frame.origin.y+151, self.view.frame.size.width, 140)];
+        [c setFrame:CGRectMake(0, c.frame.origin.y+145, self.view.frame.size.width, 140)];
     }
     
     [self.commentList addObject:comment];
     [self.scrollView addSubview:comment];
     
-    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 140*[self.commentList count]+self.view.frame.size.height)];
+    [self.scrollView setContentSize:CGSizeMake(self.view.frame.size.width, 141*[self.commentList count]+self.view.frame.size.height)];
 }
 
 

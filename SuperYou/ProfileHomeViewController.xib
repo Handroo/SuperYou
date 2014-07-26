@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileHomeViewController">
             <connections>
+                <outlet property="emptyLabel" destination="s61-yf-oks" id="P6i-KZ-sVr"/>
                 <outlet property="friendsTableView" destination="iQs-bd-c7i" id="kfR-G6-921"/>
                 <outlet property="missionsComplete" destination="OOn-iK-Jj4" id="sOg-8m-hck"/>
                 <outlet property="missionsCompleteTableView" destination="R1K-wv-I10" id="RgH-qi-U3o"/>
@@ -99,6 +100,13 @@
                         <action selector="profileActionButtonPressed:" destination="-1" eventType="touchUpInside" id="H43-KN-eYP"/>
                     </connections>
                 </button>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Empty Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="s61-yf-oks">
+                    <rect key="frame" x="20" y="241" width="280" height="97"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

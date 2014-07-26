@@ -45,7 +45,21 @@
 }
 
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self.emptyLabel setHidden:YES];
+    
+    if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
+        [self.missionsCompleteTableView setHidden:YES];
+        [self.emptyLabel setText:@"Oops! Looks like you dont have any missions completed. Tap 'Missions' on the bottom bar to search for one!"];
+        [self.emptyLabel setHidden:NO];
+        
+    }else{
+        [self.missionsCompleteTableView setHidden:NO];
+    }
+    
+    
+}
 
 
 - (void)viewDidLoad
@@ -59,7 +73,7 @@
         [self.profileActionButton setTitle:@"Friends" forState:UIControlStateNormal] ;
     }
     // Do any additional setup after loading the view from its nib.
-    [self.missionsCompleteTableView setHidden:NO];
+   
     [self.yourMissionsTableView setHidden:YES];
     [self.friendsTableView setHidden:YES];
     
@@ -109,19 +123,49 @@
 }
 
 -(IBAction)missionsCompletePressed:(id)sender{
-    [self.missionsCompleteTableView setHidden:NO];
+    
+    [self.emptyLabel setHidden:YES];
+    
+    if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
+        [self.missionsCompleteTableView setHidden:YES];
+        [self.emptyLabel setText:@"Oops! No missions completed? Tap 'Missions' on the bottom bar to search for one!"];
+        [self.emptyLabel setHidden:NO];
+        
+    }else{
+        [self.missionsCompleteTableView setHidden:NO];
+    }
     [self.yourMissionsTableView setHidden:YES];
     [self.friendsTableView setHidden:YES];
 }
 -(IBAction)yourMissionsPressed:(id)sender{
+    [self.emptyLabel setHidden:YES];
+    
+    if([self.userData.userMissions.missionArray count]<1){
+        [self.yourMissionsTableView setHidden:YES];
+        [self.emptyLabel setText:@"No missions yet? Tap 'Add' on the top left to post one!"];
+        [self.emptyLabel setHidden:NO];
+        
+    }else{
+        [self.yourMissionsTableView setHidden:NO];
+    }
+    
     [self.missionsCompleteTableView setHidden:YES];
-    [self.yourMissionsTableView setHidden:NO];
     [self.friendsTableView setHidden:YES];
 }
 -(IBAction)yourFriendsPressed:(id)sender{
+        [self.emptyLabel setHidden:YES];
+    
+    if([self.userData.userFriends.friendsDictionary count]<1){
+        [self.friendsTableView setHidden:YES];
+        [self.emptyLabel setText:@"Find friends in your profile settings page!"];
+        [self.emptyLabel setHidden:NO];
+        
+    }else{
+        [self.friendsTableView setHidden:NO];
+    }
+    
     [self.missionsCompleteTableView setHidden:YES];
     [self.yourMissionsTableView setHidden:YES];
-    [self.friendsTableView setHidden:NO];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -208,32 +252,40 @@
     if (cell == nil)
     {
         if([tableView isEqual:self.yourMissionsTableView]){
-            cell = [[MissionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"AnIdentifierString"];
-            
-            
-            NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MissionTableViewCell" owner:self options:nil];
-            cell = (MissionTableViewCell*)[topLevelObjects objectAtIndex:0];
-            ((MissionTableViewCell*)cell).timeCreated.text =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).creationDate;
-            ((MissionTableViewCell*)cell).creatorName.text =self.userData.name;
-           
-            [((MissionTableViewCell*)cell).missionDescription setEditable:NO];
-            ((MissionTableViewCell*)cell).creatorPic. image=self.userData.profile_picture;
-            ((MissionTableViewCell*)cell).creatorUserId =self.userData.user_id;
-            ((MissionTableViewCell*)cell).missionId =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).missionId;
-       
-            if([((Missions*)self.userData.userMissions.missionArray[indexPath.row]).completeUserId isEqual:@"0"]){
-    
-                 ((MissionTableViewCell*)cell).missionDescription.text =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).description;
+            if([self.userData.userMissions.missionArray count]<1){
+                [self.yourMissionsTableView setHidden:YES];
+                //set the buttons
+            }else{
+                
+                cell = [[MissionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"AnIdentifierString"];
+                
+                
+                NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"MissionTableViewCell" owner:self options:nil];
+                cell = (MissionTableViewCell*)[topLevelObjects objectAtIndex:0];
+                
+                ((MissionTableViewCell*)cell).timeCreated.text =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).creationDate;
+                ((MissionTableViewCell*)cell).creatorName.text =self.userData.name;
+                
                 [((MissionTableViewCell*)cell).missionDescription setEditable:NO];
-                ((MissionTableViewCell*)cell).finisherName.hidden = YES;
-                ((MissionTableViewCell*)cell).finisherPic.hidden = YES;
-                ((MissionTableViewCell*)cell).completedByLabelStatic.hidden = YES;
-                ((MissionTableViewCell*)cell).timeCompleted.hidden = YES;
+                ((MissionTableViewCell*)cell).creatorPic. image=self.userData.profile_picture;
+                ((MissionTableViewCell*)cell).creatorUserId =self.userData.user_id;
+                ((MissionTableViewCell*)cell).missionId =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).missionId;
+                
+                if([((Missions*)self.userData.userMissions.missionArray[indexPath.row]).completeUserId isEqual:@"0"]){
+                    
+                    ((MissionTableViewCell*)cell).missionDescription.text =((Missions*)self.userData.userMissions.missionArray[indexPath.row]).description;
+                    [((MissionTableViewCell*)cell).missionDescription setEditable:NO];
+                    ((MissionTableViewCell*)cell).finisherName.hidden = YES;
+                    ((MissionTableViewCell*)cell).finisherPic.hidden = YES;
+                    ((MissionTableViewCell*)cell).completedByLabelStatic.hidden = YES;
+                    ((MissionTableViewCell*)cell).timeCompleted.hidden = YES;
+                }
+                else{
+                    ((MissionTableViewCell*)cell).missionDescription.hidden = YES;
+                }
+                [((MissionTableViewCell*)cell) setUserHistory];
+
             }
-            else{
-                ((MissionTableViewCell*)cell).missionDescription.hidden = YES;
-            }
-            [((MissionTableViewCell*)cell) setUserHistory];
         }else if([tableView isEqual:self.missionsCompleteTableView]){
             
             cell = [[MissionTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"AnIdentifierString"];
