@@ -30,7 +30,7 @@
         self.userData = data;
         [self downloadMissionItems];
         self.navigationItem.title = @"Missions";
-        [self setMapBarButton];
+//        [self setMapBarButton];
         self.pictureStorage = [[NSMutableDictionary alloc]init];
         
     }

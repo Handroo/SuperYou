@@ -51,7 +51,7 @@
     
     if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
         [self.missionsCompleteTableView setHidden:YES];
-        [self.emptyLabel setText:@"Oops! Looks like you dont have any missions completed. Tap 'Missions' on the bottom bar to search for one!"];
+        [self.emptyLabel setText:@"Darn! No missions completed yet!"];
         [self.emptyLabel setHidden:NO];
         
     }else{
@@ -128,7 +128,7 @@
     
     if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
         [self.missionsCompleteTableView setHidden:YES];
-        [self.emptyLabel setText:@"Oops! No missions completed? Tap 'Missions' on the bottom bar to search for one!"];
+        [self.emptyLabel setText:@"Darn! No missions completed yet!"];
         [self.emptyLabel setHidden:NO];
         
     }else{
@@ -142,7 +142,7 @@
     
     if([self.userData.userMissions.missionArray count]<1){
         [self.yourMissionsTableView setHidden:YES];
-        [self.emptyLabel setText:@"No missions yet? Tap 'Add' on the top left to post one!"];
+        [self.emptyLabel setText:@"No missions posted! =["];
         [self.emptyLabel setHidden:NO];
         
     }else{
@@ -157,7 +157,7 @@
     
     if([self.userData.userFriends.friendsDictionary count]<1){
         [self.friendsTableView setHidden:YES];
-        [self.emptyLabel setText:@"Find friends in your profile settings page!"];
+        [self.emptyLabel setText:@"No friends yet!"];
         [self.emptyLabel setHidden:NO];
         
     }else{
