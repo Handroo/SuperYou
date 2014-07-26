@@ -10,6 +10,7 @@
 #import "BasePrimaryViewController.h"
 #import "UserData.h"
 @interface NewsFeedHomeViewController : BasePrimaryViewController
+@property (strong, nonatomic) IBOutlet UILabel *emptyLabel;
 @property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil userdata:(UserData*)data;
 @property(nonatomic, strong) UserData *userData;

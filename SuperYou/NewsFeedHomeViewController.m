@@ -32,6 +32,17 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.emptyLabel setHidden:YES];
+    if([self.newsFeedArray count]<1){
+        [self.newsFeedTableView setHidden:YES];
+        [self.emptyLabel setText:@"The newsfeed is made up of activities from your friends. Add more friends in your profile settings page!"];
+        [self.emptyLabel setHidden:NO];
+    }else{
+        [self.newsFeedTableView setHidden:NO];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
