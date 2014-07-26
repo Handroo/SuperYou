@@ -47,15 +47,38 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-    [self.emptyLabel setHidden:YES];
+    if(![self.missionsCompleteTableView isHidden]){
+        if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
+            [self.missionsCompleteTableView setHidden:YES];
+            [self.emptyLabel setText:@"Darn! No missions completed yet!"];
+            [self.emptyLabel setHidden:NO];
+            
+        }else{
+            [self.missionsCompleteTableView setHidden:NO];
+            [self.emptyLabel setHidden:YES];
+        }
+    }
     
-    if([self.userData.userCompletedMissions.missionCompletedArray count]<1){
-        [self.missionsCompleteTableView setHidden:YES];
-        [self.emptyLabel setText:@"Darn! No missions completed yet!"];
-        [self.emptyLabel setHidden:NO];
-        
-    }else{
-        [self.missionsCompleteTableView setHidden:NO];
+    if(![self.yourMissionsTableView isHidden]){
+        if([self.userData.userMissions.missionArray count]<1){
+            [self.yourMissionsTableView setHidden:YES];
+            [self.emptyLabel setText:@"No missions posted! =["];
+            [self.emptyLabel setHidden:NO];
+            
+        }else{
+            [self.yourMissionsTableView setHidden:NO];
+        }
+    }
+    
+    if(![self.friendsTableView isHidden]){
+        if([self.userData.userFriends.friendsDictionary count]<1){
+            [self.friendsTableView setHidden:YES];
+            [self.emptyLabel setText:@"No friends yet!"];
+            [self.emptyLabel setHidden:NO];
+            
+        }else{
+            [self.friendsTableView setHidden:NO];
+        }
     }
     
     
@@ -325,7 +348,6 @@
 
             
             
-            [((MissionTableViewCell*)cell) setBackgroundColor:[UIColor yellowColor]];
             [((MissionTableViewCell*)cell) setUserHistory];
         }else if([tableView isEqual:self.friendsTableView]){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"AnIdentifierString"];

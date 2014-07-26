@@ -170,7 +170,6 @@
         ((MissionTableViewCell*)cell).timeCompleted.hidden = YES;
     }
     else{
-        [((MissionTableViewCell*)cell) setBackgroundColor:[UIColor yellowColor]];
         ((MissionTableViewCell*)cell).missionDescription.hidden = YES;
         ((MissionTableViewCell*)cell).timeCreated.hidden = YES;
         
